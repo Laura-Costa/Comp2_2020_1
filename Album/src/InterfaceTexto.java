@@ -38,6 +38,6 @@ public class InterfaceTexto {
         System.out.println("Qtd fig coladas = " + album.getQuantFigurinhasColadas());
         System.out.println("auto completar");
         album.autoCompletar();
-        System.out.println("Qtd fig coladas = " + album.getQuantFigurinhasColadas());
+        System.out.println("Quantidade de figunrinhas coladas = " + album.getQuantFigurinhasColadas());
     }
 }

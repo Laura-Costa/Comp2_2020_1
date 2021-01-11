@@ -34,52 +34,24 @@ public class Album {
         }
     }
 
+    private void colarFigurinha(Figurinha figurinha){
+        album[figurinha.getPosicao()] = figurinha;
+    }
+
     public void autoCompletar() {
         // verifica se o álbum já está suficientemente cheio
         // o álbum só pode ser auto completado se ele estiver com mais de 90% da sua capacidade de figurinhas coladas
+
         if(!((this.getQuantFigurinhasColadas()) > (int)(PERCENTUAL_MINIMO_PARA_AUTO_COMPLETAR/100.0*this.tamanhoDoAlbum))){
             return;
         }
-        int[] arrayDeComPosicoesFaltantes = new int[tamanhoDoAlbum];
-        int quantDeFigurasFaltantes = 0;
-        for(int posicaoNoAlbum = 1; posicaoNoAlbum <= tamanhoDoAlbum; posicaoNoAlbum++){
-            if(this.album[posicaoNoAlbum] == null){
-                arrayDeComPosicoesFaltantes[quantDeFigurasFaltantes++] = posicaoNoAlbum;
+        for(int posicao = 0; posicao < this.tamanhoDoAlbum; posicao ++){
+            if(album[posicao] == null){
+                Figurinha figurinha = new Figurinha(posicao);
+                colarFigurinha(figurinha);
             }
         }
-
-        if(quantDeFigurasFaltantes == 0){
-            return;
-        }
-
-        int[] posicoes = new int[quantDeFigurasFaltantes]; // um array com a dimensão igual ao número de figurinhas faltantes
-        for(int i = 0; i < posicoes.length; i++){ // posicoes.length == j
-            posicoes[i] = arrayDeComPosicoesFaltantes[i];
-        }
-
-        int[] auxiliar = new int[this.quantFigurinhasPorPacotinho];
-
-        // chamando o construtor de Pacotinho, percorrendo o array figurinhasFaltantes
-        // e transferindo o número das figurinhas para o array auxiliar
-
-        int j = 0;
-        while(true){
-            for(int i = 0; i < this.quantFigurinhasPorPacotinho; i++){
-                auxiliar[i] = posicoes[j++];
-                if(j == posicoes.length){
-                    break;
-                }
-            }
-            Pacotinho pacotinho = new Pacotinho(this, auxiliar);
-            this.receberNovoPacotinho(pacotinho);
-            if(j == posicoes.length){
-                break;
-            }
-        }
-
     }
-
-
 
     public int getQuantFigurinhasColadas() {
         int quantFigurinhasColadas = 0;
@@ -112,13 +84,7 @@ public class Album {
     }
 
     public int getQuantFigurinhasFaltantes() {
-        int quantFigurinhasFaltantes = 0;
-        for (int i = 1; i <= tamanhoDoAlbum; i++){
-            if (album[i] == null) {
-                quantFigurinhasFaltantes++;
-            }
-        }
-        return quantFigurinhasFaltantes;
+        return this.tamanhoDoAlbum - this.getQuantFigurinhasColadas();
     }
 
     public int getTamanhoDoAlbum() {

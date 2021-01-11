@@ -13,7 +13,8 @@ public class Figurinha {
      * @return A posição que esta figurinha deve ocupar no álbum
      */
     public int getPosicao() {
-        return posicao;  // ToDo IMPLEMENT ME!!!!
+
+        return posicao;
     }
 
     public String getUrlDaImagem() {
