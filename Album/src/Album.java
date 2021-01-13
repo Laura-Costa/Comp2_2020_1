@@ -25,8 +25,7 @@ public class Album {
         this.quantPacotinhosComprados++;
         for (Figurinha fig : pacotinho) {
             if (album[fig.getPosicao()] == null){
-                album[fig.getPosicao()] = fig;
-                continue;
+                this.colarFigurinha(fig);
             }
             else{
                 this.repetidas.add(fig);
